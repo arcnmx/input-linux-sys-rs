@@ -1,14 +1,15 @@
-extern crate libc;
-
 #[macro_use]
 extern crate nix;
+extern crate libc;
 
 use std::fmt;
 use std::mem::{self, transmute};
 
-use libc::{c_char, c_int, c_uint, c_ulong};
-use libc::{uint8_t, int16_t, uint16_t, int32_t, uint32_t};
-use libc::timeval;
+use libc::{
+    c_char, c_int, c_uint, c_ulong,
+    uint8_t, int16_t, uint16_t, int32_t, uint32_t,
+    timeval, ioctl,
+};
 
 mod events;
 pub use events::*;
@@ -33,7 +34,6 @@ impl fmt::Debug for input_event {
             .field("code", &self.code)
             .field("value", &self.value)
             .finish()
-
     }
 }
 
@@ -289,9 +289,9 @@ ioctl!(read eviocgversion with b'E', 0x01; c_int);
 ioctl!(write_int eviocrmff with b'E', 0x81);
 // ioctl!(read eviocgkeycode_v2 with b'E', 0x04; /*struct*/ input_keymap_entry);
 // TODO #define EVIOCSFF _IOC ( _IOC_WRITE , 'E' , 0x80 , sizeof ( struct ff_effect ) )
-ioctl!(write_ptr eviocskeycode with b'E', 0x04; [::libc::c_uint; 2]);
+ioctl!(write_ptr eviocskeycode with b'E', 0x04; [c_uint; 2]);
 // ioctl!(write eviocskeycode_v2 with b'E', 0x04; /*struct*/ input_keymap_entry);
-ioctl!(write_ptr eviocsrep with b'E', 0x03; [::libc::c_uint; 2]);
+ioctl!(write_ptr eviocsrep with b'E', 0x03; [c_uint; 2]);
 
 ioctl!(read_buf eviocgname with b'E', 0x06; uint8_t);
 ioctl!(read_buf eviocgphys with b'E', 0x07; uint8_t);
@@ -309,11 +309,11 @@ ioctl!(write_int eviocrevoke with b'E', 0x91);
 ioctl!(write_int eviocsclockid with b'E', 0xa0);
 
 pub unsafe fn eviocgbit(fd: c_int, ev: u32, len: c_int, buf: *mut u8) -> ::nix::Result<i32> {
-    convert_ioctl_res!(libc::ioctl(fd, ior!(b'E', 0x20 + ev, len) as c_ulong, buf))
+    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x20 + ev, len) as c_ulong, buf))
 }
 
 pub unsafe fn eviocgabs(fd: c_int, abs: u32, buf: *mut input_absinfo) -> ::nix::Result<i32> {
-    convert_ioctl_res!(libc::ioctl(fd, ior!(b'E', 0x40 + abs, mem::size_of::<input_absinfo>()) as c_ulong, buf))
+    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x40 + abs, mem::size_of::<input_absinfo>()) as c_ulong, buf))
 }
 
 ioctl!(none ui_dev_create with b'U', 1);
