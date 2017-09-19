@@ -1,2 +1,5 @@
-target
-Cargo.lock
+/Cargo.lock
+/target/
+/.cargo/
+/.gitattributes
+*.swp
