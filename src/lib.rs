@@ -127,7 +127,7 @@ pub struct input_absinfo {
 
 impl Default for input_absinfo {
     fn default() -> Self {
-        unsafe { ::std::mem::zeroed() }
+        unsafe { mem::zeroed() }
     }
 }
 
@@ -211,7 +211,7 @@ pub struct ff_ramp_effect {
 
 impl Default for ff_ramp_effect {
     fn default() -> Self {
-        unsafe { ::std::mem::zeroed() }
+        unsafe { mem::zeroed() }
     }
 }
 
@@ -228,7 +228,7 @@ pub struct ff_condition_effect {
 
 impl Default for ff_condition_effect {
     fn default() -> Self {
-        unsafe { ::std::mem::zeroed() }
+        unsafe { mem::zeroed() }
     }
 }
 
