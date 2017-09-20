@@ -8,8 +8,10 @@ use std::mem::{self, transmute};
 use libc::{
     c_char, c_int, c_uint, c_ulong,
     uint8_t, int16_t, uint16_t, int32_t, uint32_t,
-    timeval, ioctl,
+    ioctl,
 };
+
+pub use libc::timeval;
 
 mod events;
 pub use events::*;
