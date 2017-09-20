@@ -54,10 +54,16 @@ pub struct uinput_ff_erase {
 
 ioctl!(none ui_dev_create with b'U', 1);
 ioctl!(none ui_dev_destroy with b'U', 2);
-/// Set device parameters for setup
-ioctl!(write_ptr ui_dev_setup with b'U', 3; uinput_setup);
-/// Set absolute axis information for the device to setup
-ioctl!(write_ptr ui_abs_setup with b'U', 4; uinput_abs_setup);
+
+ioctl! {
+    /// Set device parameters for setup
+    write_ptr ui_dev_setup with b'U', 3; uinput_setup
+}
+
+ioctl! {
+    /// Set absolute axis information for the device to setup
+    write_ptr ui_abs_setup with b'U', 4; uinput_abs_setup
+}
 
 ioctl!(write_int ui_set_evbit with b'U', 100);
 ioctl!(write_int ui_set_keybit with b'U', 101);
@@ -77,7 +83,12 @@ ioctl!(write_ptr ui_end_ff_upload with b'U', 201; uinput_ff_upload);
 ioctl!(readwrite ui_begin_ff_erase with b'U', 202; uinput_ff_erase);
 ioctl!(write_ptr ui_end_ff_erase with b'U', 203; uinput_ff_erase);
 
-/// get the sysfs name of the created uinput device
-ioctl!(read_buf ui_get_sysname with b'U', 44; c_char);
-/// Return version of uinput protocol
-ioctl!(read ui_get_version with b'U', 45; c_uint);
+ioctl! {
+    /// get the sysfs name of the created uinput device
+    read_buf ui_get_sysname with b'U', 44; c_char
+}
+
+ioctl! {
+    /// Return version of uinput protocol
+    read ui_get_version with b'U', 45; c_uint
+}
