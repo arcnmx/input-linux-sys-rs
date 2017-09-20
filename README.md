@@ -2,7 +2,7 @@
 
 [![travis-badge][]][travis] [![release-badge][]][cargo] [![docs-badge][]][docs] [![license-badge][]][license]
 
-Rust bindings to uinput and evdev from `<linux/input.h>`
+Rust bindings to uinput and evdev from `<linux/{u,}input.h>`
 
 A combination of [rust-uinput-sys](https://github.com/meh/rust-uinput-sys) and
 [evdev/raw.rs](https://github.com/cmr/evdev).
