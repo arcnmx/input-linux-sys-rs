@@ -1,6 +1,6 @@
 [package]
 name = "input-linux-sys"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["arcnmx", "meh. <meh@schizofreni.co>", "Corey Richardson <corey@octayn.net>"]
 
 description = "Bindings for <linux/input.h>"
