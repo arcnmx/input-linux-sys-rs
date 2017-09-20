@@ -11,48 +11,22 @@ use libc::{
     ioctl,
 };
 
-pub use libc::timeval;
+pub use libc::{
+    timeval,
+    input_event, input_id, input_absinfo, input_keymap_entry, input_mask,
+    ff_replay, ff_trigger, ff_envelope, ff_effect, ff_constant_effect,
+    ff_ramp_effect, ff_condition_effect, ff_periodic_effect, ff_rumble_effect,
+};
 
 mod events;
 pub use events::*;
 
 pub const UINPUT_MAX_NAME_SIZE: c_int = 80;
 
-#[derive(Clone, Copy)]
-#[repr(C)]
-pub struct input_event {
-    pub time: timeval,
-    pub kind: uint16_t, // type
-    pub code: uint16_t,
-    pub value: int32_t,
-}
+/// Protocol version.
+pub const EV_VERSION: c_int = 0x010001;
 
-impl fmt::Debug for input_event {
-    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
-        fmt.debug_struct("input_event")
-            .field("tv_sec", &self.time.tv_sec)
-            .field("tv_usec", &self.time.tv_usec)
-            .field("kind", &self.kind)
-            .field("code", &self.code)
-            .field("value", &self.value)
-            .finish()
-    }
-}
-
-impl Default for input_event {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[derive(Clone, Copy, Debug)]
-#[repr(C)]
-pub struct input_id {
-    pub bustype: uint16_t,
-    pub vendor: uint16_t,
-    pub product: uint16_t,
-    pub version: uint16_t,
-}
+pub const UINPUT_VERSION: c_int = 5;
 
 #[repr(C)]
 pub struct uinput_user_dev {
@@ -67,207 +41,106 @@ pub struct uinput_user_dev {
 }
 
 #[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_effect {
-    pub _type: uint16_t,
-    pub id: int16_t,
-    pub direction: uint16_t,
-    pub trigger: ff_trigger,
-    pub replay: ff_replay,
-    pub u: ff_effect_union,
+#[derive(Copy, Clone)]
+pub struct ff_effect_union {
+    #[cfg(target_pointer_width = "64")]
+    pub u: [u64; 4],
+    #[cfg(target_pointer_width = "32")]
+    pub u: [u32; 7],
 }
 
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_effect_union {
-    pub _bindgen_data_: [u64; 4],
+impl<'a> From<&'a ff_effect> for &'a ff_effect_union {
+    fn from(effect: &'a ff_effect) -> Self {
+        unsafe {
+            let raw = &effect.u as *const _ as *const _;
+            &*raw
+        }
+    }
+}
+
+impl<'a> From<&'a mut ff_effect> for &'a mut ff_effect_union {
+    fn from(effect: &'a ff_effect) -> Self {
+        unsafe {
+            let raw = &mut effect.u as *mut _ as *mut _;
+            &mut *raw
+        }
+    }
 }
 
 impl ff_effect_union {
-    pub unsafe fn constant(&mut self) -> *mut ff_constant_effect {
-        let raw: *mut u8 = transmute(&self._bindgen_data_);
-        transmute(raw.offset(0))
+    pub fn constant(&self) -> &ff_constant_effect {
+        unsafe {
+            let raw = &self.u as *const _ as *const _;
+            &*raw
+        }
     }
 
-    pub unsafe fn ramp(&mut self) -> *mut ff_ramp_effect {
-        let raw: *mut u8 = transmute(&self._bindgen_data_);
-        transmute(raw.offset(0))
+    pub fn constant_mut(&mut self) -> &mut ff_constant_effect {
+        unsafe {
+            let raw = &mut self.u as *mut _ as *mut _;
+            &mut *raw
+        }
     }
 
-    pub unsafe fn periodic(&mut self) -> *mut ff_periodic_effect {
-        let raw: *mut u8 = transmute(&self._bindgen_data_);
-        transmute(raw.offset(0))
+    pub fn ramp(&self) -> &ff_ramp_effect {
+        unsafe {
+            let raw = &self.u as *const _ as *const _;
+            &*raw
+        }
     }
 
-    pub unsafe fn condition(&mut self) -> *mut [ff_condition_effect; 2] {
-        let raw: *mut u8 = transmute(&self._bindgen_data_);
-        transmute(raw.offset(0))
+    pub fn ramp_mut(&mut self) -> &mut ff_ramp_effect {
+        unsafe {
+            let raw = &mut self.u as *mut _ as *mut _;
+            &mut *raw
+        }
     }
 
-    pub unsafe fn rumble(&mut self) -> *mut ff_rumble_effect {
-        let raw: *mut u8 = transmute(&self._bindgen_data_);
-        transmute(raw.offset(0))
+    pub fn periodic(&self) -> &ff_periodic_effect {
+        unsafe {
+            let raw = &self.u as *const _ as *const _;
+            &*raw
+        }
     }
-}
 
-impl Default for ff_effect_union {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
+    pub fn periodic_mut(&mut self) -> &mut ff_periodic_effect {
+        unsafe {
+            let raw = &mut self.u as *mut _ as *mut _;
+            &mut *raw
+        }
     }
-}
 
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Ord, PartialEq, PartialOrd, Hash)]
-pub struct input_absinfo {
-    pub value: int32_t,
-    pub minimum: int32_t,
-    pub maximum: int32_t,
-    pub fuzz: int32_t,
-    pub flat: int32_t,
-    pub resolution: int32_t,
-}
-
-impl Default for input_absinfo {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
+    pub fn condition(&self) -> &[ff_condition_effect; 2] {
+        unsafe {
+            let raw = &self.u as *const _ as *const _;
+            &*raw
+        }
     }
-}
 
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct input_keymap_entry {
-    pub flags: uint8_t,
-    pub len: uint8_t,
-    pub index: uint16_t,
-    pub keycode: uint32_t,
-    pub scancode: [uint8_t; 32],
-}
-
-impl Default for input_keymap_entry {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
+    pub fn condition_mut(&mut self) -> &mut [ff_condition_effect; 2] {
+        unsafe {
+            let raw = &mut self.u as *mut _ as *mut _;
+            &mut *raw
+        }
     }
-}
 
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_replay {
-    pub length: uint16_t,
-    pub delay: uint16_t,
-}
+    pub fn rumble(&self) -> &ff_rumble_effect {
+        unsafe {
+            let raw = &self.u as *const _ as *const _;
+            &*raw
+        }
+    }
 
-impl Default for ff_replay {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
+    pub fn rumble_mut(&mut self) -> &mut ff_rumble_effect {
+        unsafe {
+            let raw = &mut self.u as *mut _ as *mut _;
+            &mut *raw
+        }
     }
 }
 
 #[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_trigger {
-    pub button: uint16_t,
-    pub interval: uint16_t,
-}
-
-impl Default for ff_trigger {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_envelope {
-    pub attack_length: uint16_t,
-    pub attack_level: uint16_t,
-    pub fade_length: uint16_t,
-    pub fade_level: uint16_t,
-}
-
-impl Default for ff_envelope {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_constant_effect {
-    pub level: int16_t,
-    pub envelope: ff_envelope,
-}
-
-impl Default for ff_constant_effect {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_ramp_effect {
-    pub start_level: int16_t,
-    pub end_level: int16_t,
-    pub envelope: ff_envelope,
-}
-
-impl Default for ff_ramp_effect {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_condition_effect {
-    pub right_saturation: uint16_t,
-    pub left_saturation: uint16_t,
-    pub right_coeff: int16_t,
-    pub left_coeff: int16_t,
-    pub deadband: uint16_t,
-    pub center: int16_t,
-}
-
-impl Default for ff_condition_effect {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_periodic_effect {
-    pub waveform: uint16_t,
-    pub period: uint16_t,
-    pub magnitude: int16_t,
-    pub offset: int16_t,
-    pub phase: uint16_t,
-    pub envelope: ff_envelope,
-    pub custom_len: uint32_t,
-    pub custom_data: *mut int16_t,
-}
-
-impl Default for ff_periodic_effect {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-pub struct ff_rumble_effect {
-    pub strong_magnitude: uint16_t,
-    pub weak_magnitude: uint16_t,
-}
-
-impl Default for ff_rumble_effect {
-    fn default() -> Self {
-        unsafe { mem::zeroed() }
-    }
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone)]
 pub struct uinput_ff_upload {
     pub request_id: uint32_t,
     pub retval: int32_t,
@@ -276,7 +149,7 @@ pub struct uinput_ff_upload {
 }
 
 #[repr(C)]
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone)]
 pub struct uinput_ff_erase {
     pub request_id: uint32_t,
     pub retval: int32_t,
