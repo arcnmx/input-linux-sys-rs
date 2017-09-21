@@ -63,7 +63,7 @@ pub const KEY_6:          c_int = 7;
 pub const KEY_7:          c_int = 8;
 pub const KEY_8:          c_int = 9;
 pub const KEY_9:          c_int = 10;
-pub const KEY_10:         c_int = 11;
+pub const KEY_0:          c_int = 11;
 pub const KEY_MINUS:      c_int = 12;
 pub const KEY_EQUAL:      c_int = 13;
 pub const KEY_BACKSPACE:  c_int = 14;
@@ -588,6 +588,38 @@ pub const KEY_KBDINPUTASSIST_PREVGROUP: c_int = 0x262;
 pub const KEY_KBDINPUTASSIST_NEXTGROUP: c_int = 0x263;
 pub const KEY_KBDINPUTASSIST_ACCEPT:    c_int = 0x264;
 pub const KEY_KBDINPUTASSIST_CANCEL:    c_int = 0x265;
+
+/* Diagonal movement keys */
+pub const KEY_RIGHT_UP: c_int = 0x266;
+pub const KEY_RIGHT_DOWN: c_int = 0x267;
+pub const KEY_LEFT_UP: c_int = 0x268;
+pub const KEY_LEFT_DOWN: c_int = 0x269;
+
+pub const KEY_ROOT_MENU: c_int = 0x26a; /* Show Device's Root Menu */
+/* Show Top Menu of the Media (e.g. DVD) */
+pub const KEY_MEDIA_TOP_MENU: c_int = 0x26b;
+pub const KEY_NUMERIC_11: c_int = 0x26c;
+pub const KEY_NUMERIC_12: c_int = 0x26d;
+/*
+ * Toggle Audio Description: refers to an audio service that helps blind and
+ * visually impaired consumers understand the action in a program. Note: in
+ * some countries this is referred to as "Video Description".
+ */
+pub const KEY_AUDIO_DESC: c_int = 0x26e;
+pub const KEY_3D_MODE: c_int = 0x26f;
+pub const KEY_NEXT_FAVORITE: c_int = 0x270;
+pub const KEY_STOP_RECORD: c_int = 0x271;
+pub const KEY_PAUSE_RECORD: c_int = 0x272;
+pub const KEY_VOD: c_int = 0x273; /* Video on Demand */
+pub const KEY_UNMUTE: c_int = 0x274;
+pub const KEY_FASTREVERSE: c_int = 0x275;
+pub const KEY_SLOWREVERSE: c_int = 0x276;
+/*
+ * Control a data application associated with the currently viewed channel,
+ * e.g. teletext or data broadcast application (MHEG, MHP, HbbTV, etc.)
+ */
+pub const KEY_DATA: c_int = 0x277;
+pub const KEY_ONSCREEN_KEYBOARD: c_int = 0x278;
 
 pub const BTN_TRIGGER_HAPPY:   c_int = 0x2c0;
 pub const BTN_TRIGGER_HAPPY1:  c_int = 0x2c0;
