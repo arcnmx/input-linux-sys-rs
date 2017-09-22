@@ -236,8 +236,8 @@ ioctl! {
 }
 
 /// get event bits
-pub unsafe fn ev_get_bit(fd: c_int, ev: u32, len: c_int, buf: *mut uint8_t) -> nix::Result<i32> {
-    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x20 + ev, len) as ioctl_num_type, buf))
+pub unsafe fn ev_get_bit(fd: c_int, ev: u32, buf: &mut [uint8_t]) -> nix::Result<i32> {
+    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x20 + ev, buf.len()) as ioctl_num_type, buf))
 }
 
 /// get abs value/limits
@@ -250,9 +250,10 @@ pub unsafe fn ev_set_abs(fd: c_int, abs: u32, buf: *const input_absinfo) -> nix:
     convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x40 + abs, size_of::<input_absinfo>()) as ioctl_num_type, buf))
 }
 
-ioctl! {
-    /// send a force effect to a force feedback device
-    write_ptr ev_send_ff with b'E', 0x80; ff_effect
+/// send a force effect to a force feedback device
+pub unsafe fn ev_send_ff(fd: c_int, buf: *mut ff_effect) -> nix::Result<i32> {
+    // for some reason this isn't _IORW?
+    convert_ioctl_res!(ioctl(fd, iow!(b'E', 0x80, size_of::<ff_effect>()) as ioctl_num_type, buf))
 }
 
 ioctl! {
