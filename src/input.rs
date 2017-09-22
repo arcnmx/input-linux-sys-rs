@@ -157,7 +157,7 @@ ioctl! {
 
 ioctl! {
     /// get device ID
-    read ev_get_id with b'E', 0x02; /*struct*/ input_id
+    read ev_get_id with b'E', 0x02; input_id
 }
 
 ioctl! {
