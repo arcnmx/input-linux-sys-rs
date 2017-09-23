@@ -339,7 +339,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">size_of</span>;
 <span class="kw">use</span> <span class="ident">nix</span>;
 <span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">sys</span>::<span class="ident">ioctl</span>::<span class="ident">ioctl_num_type</span>;
-<span class="kw">use</span> <span class="ident">libc</span>::{<span class="ident">c_int</span>, <span class="ident">c_uint</span>, <span class="ident">uint8_t</span>, <span class="ident">uint16_t</span>, <span class="ident">ioctl</span>};
+<span class="kw">use</span> <span class="ident">libc</span>::{<span class="ident">c_int</span>, <span class="ident">c_uint</span>, <span class="ident">uint8_t</span>, <span class="ident">uint16_t</span>, <span class="ident">clockid_t</span>, <span class="ident">ioctl</span>};
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">libc</span>::{
     <span class="ident">timeval</span>,
@@ -626,7 +626,7 @@
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
     <span class="doccomment">/// Set clockid to be used for timestamps</span>
-    <span class="ident">write_int</span> <span class="ident">ev_set_clockid</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0xa0</span>
+    <span class="ident">write_ptr</span> <span class="ident">ev_set_clockid</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0xa0</span>; <span class="ident">clockid_t</span>
 }
 </pre>
 </section>
