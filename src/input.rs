@@ -1,7 +1,7 @@
 use std::mem::size_of;
 use nix;
 use nix::sys::ioctl::ioctl_num_type;
-use libc::{c_int, c_uint, uint8_t, uint16_t, ioctl};
+use libc::{c_int, c_uint, uint8_t, uint16_t, clockid_t, ioctl};
 
 pub use libc::{
     timeval,
@@ -288,5 +288,5 @@ ioctl! {
 
 ioctl! {
     /// Set clockid to be used for timestamps
-    write_int ev_set_clockid with b'E', 0xa0
+    write_ptr ev_set_clockid with b'E', 0xa0; clockid_t
 }
