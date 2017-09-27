@@ -20,7 +20,7 @@ pub struct uinput_setup {
 #[repr(C)]
 pub struct uinput_abs_setup {
     pub code: uint16_t,
-    absinfo: ::input_absinfo,
+    pub absinfo: ::input_absinfo,
 }
 
 #[repr(C)]
