@@ -1,7 +1,7 @@
 use std::mem::size_of;
 use nix;
 use nix::sys::ioctl::ioctl_num_type;
-use libc::{c_char, c_int, c_uint, uint16_t, clockid_t, ioctl};
+use libc::{c_char, c_int, c_uint, uint8_t, uint16_t, int32_t, uint32_t, clockid_t, ioctl};
 
 pub use libc::{
     timeval,
