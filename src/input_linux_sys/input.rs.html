@@ -335,11 +335,26 @@
 <span id="290">290</span>
 <span id="291">291</span>
 <span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
 </pre><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">size_of</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>::{<span class="ident">size_of</span>, <span class="ident">size_of_val</span>};
 <span class="kw">use</span> <span class="ident">nix</span>;
 <span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">sys</span>::<span class="ident">ioctl</span>::<span class="ident">ioctl_num_type</span>;
-<span class="kw">use</span> <span class="ident">libc</span>::{<span class="ident">c_int</span>, <span class="ident">c_uint</span>, <span class="ident">uint8_t</span>, <span class="ident">uint16_t</span>, <span class="ident">clockid_t</span>, <span class="ident">ioctl</span>};
+<span class="kw">use</span> <span class="ident">libc</span>::{<span class="ident">c_char</span>, <span class="ident">c_int</span>, <span class="ident">c_uint</span>, <span class="ident">uint8_t</span>, <span class="ident">uint16_t</span>, <span class="ident">int32_t</span>, <span class="ident">uint32_t</span>, <span class="ident">clockid_t</span>, <span class="ident">ioctl</span>};
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">libc</span>::{
     <span class="ident">timeval</span>,
@@ -488,6 +503,20 @@
     }
 }
 
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">repeat_settings</span> {
+    <span class="kw">pub</span> <span class="ident">delay</span>: <span class="ident">c_uint</span>,
+    <span class="kw">pub</span> <span class="ident">period</span>: <span class="ident">c_uint</span>,
+}
+
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">input_mt_request_layout</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">=</span> [<span class="ident">int32_t</span>]<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="ident">code</span>: <span class="ident">uint32_t</span>,
+    <span class="kw">pub</span> <span class="ident">values</span>: <span class="ident">T</span>,
+}
+
 <span class="macro">ioctl</span><span class="macro">!</span> {
     <span class="doccomment">/// get driver version</span>
     <span class="ident">read</span> <span class="ident">ev_get_version</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x01</span>; <span class="ident">c_int</span>
@@ -500,12 +529,12 @@
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
     <span class="doccomment">/// get repeat settings</span>
-    <span class="ident">read</span> <span class="ident">ev_get_rep</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x03</span>; [<span class="ident">c_uint</span>; <span class="number">2</span>]
+    <span class="ident">read</span> <span class="ident">ev_get_rep</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x03</span>; <span class="ident">repeat_settings</span>
 }
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
     <span class="doccomment">/// set repeat settings</span>
-    <span class="ident">write_ptr</span> <span class="ident">ev_set_rep</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x03</span>; [<span class="ident">c_uint</span>; <span class="number">2</span>]
+    <span class="ident">write_ptr</span> <span class="ident">ev_set_rep</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x03</span>; <span class="ident">repeat_settings</span>
 }
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
@@ -530,17 +559,17 @@
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
     <span class="doccomment">/// get device name</span>
-    <span class="ident">read_buf</span> <span class="ident">ev_get_name</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x06</span>; <span class="ident">uint8_t</span>
+    <span class="ident">read_buf</span> <span class="ident">ev_get_name</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x06</span>; <span class="ident">c_char</span>
 }
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
     <span class="doccomment">/// get physical location</span>
-    <span class="ident">read_buf</span> <span class="ident">ev_get_phys</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x07</span>; <span class="ident">uint8_t</span>
+    <span class="ident">read_buf</span> <span class="ident">ev_get_phys</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x07</span>; <span class="ident">c_char</span>
 }
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
     <span class="doccomment">/// get unique identifier</span>
-    <span class="ident">read_buf</span> <span class="ident">ev_get_uniq</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x08</span>; <span class="ident">uint8_t</span>
+    <span class="ident">read_buf</span> <span class="ident">ev_get_uniq</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x08</span>; <span class="ident">c_char</span>
 }
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
@@ -548,9 +577,10 @@
     <span class="ident">read_buf</span> <span class="ident">ev_get_prop</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x09</span>; <span class="ident">uint8_t</span>
 }
 
-<span class="macro">ioctl</span><span class="macro">!</span> {
-    <span class="doccomment">/// get MT slot values</span>
-    <span class="ident">read_buf</span> <span class="ident">ev_get_mtslots</span> <span class="ident">with</span> <span class="string">b&#39;E&#39;</span>, <span class="number">0x0a</span>; <span class="ident">uint8_t</span>
+<span class="doccomment">/// get MT slot values</span>
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">ev_get_mtslots</span>(<span class="ident">fd</span>: <span class="ident">c_int</span>, <span class="ident">buf</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">input_mt_request_layout</span>) <span class="op">-&gt;</span> <span class="ident">nix</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
+    <span class="comment">// for some reason this isn&#39;t _IORW?</span>
+    <span class="macro">convert_ioctl_res</span><span class="macro">!</span>(<span class="ident">ioctl</span>(<span class="ident">fd</span>, <span class="macro">ior</span><span class="macro">!</span>(<span class="string">b&#39;E&#39;</span>, <span class="number">0x0a</span>, <span class="ident">size_of_val</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">buf</span>)) <span class="kw">as</span> <span class="ident">ioctl_num_type</span>, <span class="ident">buf</span>))
 }
 
 <span class="macro">ioctl</span><span class="macro">!</span> {
