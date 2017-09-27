@@ -1,7 +1,7 @@
 use std::mem::size_of;
 use nix;
 use nix::sys::ioctl::ioctl_num_type;
-use libc::{c_int, c_uint, uint8_t, uint16_t, clockid_t, ioctl};
+use libc::{c_char, c_int, c_uint, uint16_t, clockid_t, ioctl};
 
 pub use libc::{
     timeval,
@@ -150,6 +150,13 @@ impl ff_effect_union {
     }
 }
 
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct repeat_settings {
+    pub delay: c_uint,
+    pub period: c_uint,
+}
+
 ioctl! {
     /// get driver version
     read ev_get_version with b'E', 0x01; c_int
@@ -162,12 +169,12 @@ ioctl! {
 
 ioctl! {
     /// get repeat settings
-    read ev_get_rep with b'E', 0x03; [c_uint; 2]
+    read ev_get_rep with b'E', 0x03; repeat_settings
 }
 
 ioctl! {
     /// set repeat settings
-    write_ptr ev_set_rep with b'E', 0x03; [c_uint; 2]
+    write_ptr ev_set_rep with b'E', 0x03; repeat_settings
 }
 
 ioctl! {
@@ -192,17 +199,17 @@ ioctl! {
 
 ioctl! {
     /// get device name
-    read_buf ev_get_name with b'E', 0x06; uint8_t
+    read_buf ev_get_name with b'E', 0x06; c_char
 }
 
 ioctl! {
     /// get physical location
-    read_buf ev_get_phys with b'E', 0x07; uint8_t
+    read_buf ev_get_phys with b'E', 0x07; c_char
 }
 
 ioctl! {
     /// get unique identifier
-    read_buf ev_get_uniq with b'E', 0x08; uint8_t
+    read_buf ev_get_uniq with b'E', 0x08; c_char
 }
 
 ioctl! {
