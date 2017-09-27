@@ -1,4 +1,4 @@
-use std::mem::size_of;
+use std::mem::{size_of, size_of_val};
 use nix;
 use nix::sys::ioctl::ioctl_num_type;
 use libc::{c_char, c_int, c_uint, uint8_t, uint16_t, int32_t, uint32_t, clockid_t, ioctl};
@@ -157,6 +157,13 @@ pub struct repeat_settings {
     pub period: c_uint,
 }
 
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct input_mt_request_layout<T: ?Sized = [int32_t]> {
+    pub code: uint32_t,
+    pub values: T,
+}
+
 ioctl! {
     /// get driver version
     read ev_get_version with b'E', 0x01; c_int
@@ -217,9 +224,10 @@ ioctl! {
     read_buf ev_get_prop with b'E', 0x09; uint8_t
 }
 
-ioctl! {
-    /// get MT slot values
-    read_buf ev_get_mtslots with b'E', 0x0a; uint8_t
+/// get MT slot values
+pub unsafe fn ev_get_mtslots(fd: c_int, buf: *mut input_mt_request_layout) -> nix::Result<i32> {
+    // for some reason this isn't _IORW?
+    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x0a, size_of_val(&*buf)) as ioctl_num_type, buf))
 }
 
 ioctl! {
