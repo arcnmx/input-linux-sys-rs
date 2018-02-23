@@ -28,8 +28,9 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
-        <p class='location'>Struct ff_effect</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>input_linux_sys</a></p><script>window.sidebarCurrent = {name: 'ff_effect', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct ff_effect</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#fields">Fields</a><div class="sidebar-links"><a href="#structfield.type_">type_</a><a href="#structfield.id">id</a><a href="#structfield.direction">direction</a><a href="#structfield.trigger">trigger</a><a href="#structfield.replay">replay</a><a href="#structfield.u">u</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Copy">Copy</a><a href="#impl-Clone">Clone</a><a href="#impl-From%3C%26%27a%20ff_effect%3E">From&lt;&amp;&#39;a ff_effect&gt;</a><a href="#impl-From%3C%26%27a%20mut%20ff_effect%3E">From&lt;&amp;&#39;a mut ff_effect&gt;</a></div></div><p class='location'><a href='index.html'>input_linux_sys</a></p><script>window.sidebarCurrent = {name: 'ff_effect', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
     <nav class="sub">
@@ -57,30 +58,47 @@
     pub trigger: <a class="struct" href="../input_linux_sys/struct.ff_trigger.html" title="struct input_linux_sys::ff_trigger">ff_trigger</a>,
     pub replay: <a class="struct" href="../input_linux_sys/struct.ff_replay.html" title="struct input_linux_sys::ff_replay">ff_replay</a>,
     pub u: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 4]</a>,
-}</pre><h2 id='fields' class='fields'>Fields</h2><span id='structfield.type_' class="structfield">
-                           <span id='type_.v' class='invisible'>
+}</pre><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id="structfield.type_" class="structfield small-section-header">
+                           <a href="#structfield.type_" class="anchor field"></a>
+                           <span id="type_.v" class='invisible'>
                            <code>type_: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a></code>
-                           </span></span><span id='structfield.id' class="structfield">
-                           <span id='id.v' class='invisible'>
+                           </span></span><span id="structfield.id" class="structfield small-section-header">
+                           <a href="#structfield.id" class="anchor field"></a>
+                           <span id="id.v" class='invisible'>
                            <code>id: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i16.html">i16</a></code>
-                           </span></span><span id='structfield.direction' class="structfield">
-                           <span id='direction.v' class='invisible'>
+                           </span></span><span id="structfield.direction" class="structfield small-section-header">
+                           <a href="#structfield.direction" class="anchor field"></a>
+                           <span id="direction.v" class='invisible'>
                            <code>direction: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a></code>
-                           </span></span><span id='structfield.trigger' class="structfield">
-                           <span id='trigger.v' class='invisible'>
+                           </span></span><span id="structfield.trigger" class="structfield small-section-header">
+                           <a href="#structfield.trigger" class="anchor field"></a>
+                           <span id="trigger.v" class='invisible'>
                            <code>trigger: <a class="struct" href="../input_linux_sys/struct.ff_trigger.html" title="struct input_linux_sys::ff_trigger">ff_trigger</a></code>
-                           </span></span><span id='structfield.replay' class="structfield">
-                           <span id='replay.v' class='invisible'>
+                           </span></span><span id="structfield.replay" class="structfield small-section-header">
+                           <a href="#structfield.replay" class="anchor field"></a>
+                           <span id="replay.v" class='invisible'>
                            <code>replay: <a class="struct" href="../input_linux_sys/struct.ff_replay.html" title="struct input_linux_sys::ff_replay">ff_replay</a></code>
-                           </span></span><span id='structfield.u' class="structfield">
-                           <span id='u.v' class='invisible'>
+                           </span></span><span id="structfield.u" class="structfield small-section-header">
+                           <a href="#structfield.u" class="anchor field"></a>
+                           <span id="u.v" class='invisible'>
                            <code>u: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 4]</a></code>
-                           </span></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/libc/x86_64-unknown-linux-gnu/src/libc/macros.rs.html#44' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/libc/x86_64-unknown-linux-gnu/src/libc/macros.rs.html#45-47' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a></code></span></h4>
+                           </span></span>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Copy' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a></code><a href='#impl-Copy' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/libc/x86_64-unknown-linux-gnu/src/libc/macros.rs.html#44' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/libc/x86_64-unknown-linux-gnu/src/libc/macros.rs.html#45-47' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/libc/x86_64-unknown-linux-gnu/src/libc/macros.rs.html#46' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
-</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Self)</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/clone.rs.html#112-114' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 id='impl-From%3C%26%27a%20ff_effect%3E' class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;&amp;'a <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a>&gt; for &amp;'a <a class="struct" href="../input_linux_sys/struct.ff_effect_union.html" title="struct input_linux_sys::ff_effect_union">ff_effect_union</a></code><a href='#impl-From%3C%26%27a%20ff_effect%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/input_linux_sys/input.rs.html#63-70' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from' class="method"><span id='from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(effect: &amp;'a <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a>) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/input_linux_sys/input.rs.html#64-69' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs the conversion.</p>
+</div></div><h3 id='impl-From%3C%26%27a%20mut%20ff_effect%3E' class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.From.html" title="trait core::convert::From">From</a>&lt;&amp;'a mut <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a>&gt; for &amp;'a mut <a class="struct" href="../input_linux_sys/struct.ff_effect_union.html" title="struct input_linux_sys::ff_effect_union">ff_effect_union</a></code><a href='#impl-From%3C%26%27a%20mut%20ff_effect%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/input_linux_sys/input.rs.html#72-79' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from-1' class="method"><span id='from.v-1' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(effect: &amp;'a mut <a class="struct" href="../input_linux_sys/struct.ff_effect.html" title="struct input_linux_sys::ff_effect">ff_effect</a>) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/input_linux_sys/input.rs.html#73-78' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs the conversion.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -98,13 +116,15 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
