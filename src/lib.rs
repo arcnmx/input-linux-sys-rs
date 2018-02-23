@@ -2,7 +2,8 @@
 extern crate nix;
 extern crate libc;
 
-pub use nix::{Error, Errno, Result};
+pub use nix::{Error, Result};
+pub use nix::errno::Errno;
 
 mod events;
 pub use events::*;
