@@ -67,8 +67,8 @@ ioctl! {
 
 ioctl!(write_int ui_set_evbit with b'U', 100);
 ioctl!(write_int ui_set_keybit with b'U', 101);
-ioctl!(write_int ui_set_absbit with b'U', 102);
-ioctl!(write_int ui_set_relbit with b'U', 103);
+ioctl!(write_int ui_set_relbit with b'U', 102);
+ioctl!(write_int ui_set_absbit with b'U', 103);
 ioctl!(write_int ui_set_mscbit with b'U', 104);
 ioctl!(write_int ui_set_ledbit with b'U', 105);
 ioctl!(write_int ui_set_sndbit with b'U', 106);
