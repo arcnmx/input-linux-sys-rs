@@ -1,4 +1,4 @@
-use libc::{c_int};
+use libc::c_int;
 
 pub const INPUT_PROP_POINTER:        c_int = 0x00; /* needs a pointer */
 pub const INPUT_PROP_DIRECT:         c_int = 0x01; /* direct input devices */

@@ -1,7 +1,7 @@
 use std::mem::{size_of, size_of_val};
 use nix;
 use nix::sys::ioctl::ioctl_num_type;
-use libc::{c_char, c_int, c_uint, uint8_t, uint16_t, int32_t, uint32_t, clockid_t, ioctl};
+use libc::{c_char, c_int, c_uint, clockid_t, ioctl};
 
 pub use libc::{
     timeval,
@@ -18,38 +18,38 @@ pub const ID_VENDOR: usize = 1;
 pub const ID_PRODUCT: usize = 2;
 pub const ID_VERSION: usize = 3;
 
-pub const BUS_PCI: uint16_t = 0x01;
-pub const BUS_ISAPNP: uint16_t = 0x02;
-pub const BUS_USB: uint16_t = 0x03;
-pub const BUS_HIL: uint16_t = 0x04;
-pub const BUS_BLUETOOTH: uint16_t = 0x05;
-pub const BUS_VIRTUAL: uint16_t = 0x06;
+pub const BUS_PCI: u16 = 0x01;
+pub const BUS_ISAPNP: u16 = 0x02;
+pub const BUS_USB: u16 = 0x03;
+pub const BUS_HIL: u16 = 0x04;
+pub const BUS_BLUETOOTH: u16 = 0x05;
+pub const BUS_VIRTUAL: u16 = 0x06;
 
-pub const BUS_ISA: uint16_t = 0x10;
-pub const BUS_I8042: uint16_t = 0x11;
-pub const BUS_XTKBD: uint16_t = 0x12;
-pub const BUS_RS232: uint16_t = 0x13;
-pub const BUS_GAMEPORT: uint16_t = 0x14;
-pub const BUS_PARPORT: uint16_t = 0x15;
-pub const BUS_AMIGA: uint16_t = 0x16;
-pub const BUS_ADB: uint16_t = 0x17;
-pub const BUS_I2C: uint16_t = 0x18;
-pub const BUS_HOST: uint16_t = 0x19;
-pub const BUS_GSC: uint16_t = 0x1A;
-pub const BUS_ATARI: uint16_t = 0x1B;
-pub const BUS_SPI: uint16_t = 0x1C;
-pub const BUS_RMI: uint16_t = 0x1D;
-pub const BUS_CEC: uint16_t = 0x1E;
-pub const BUS_INTEL_ISHTP: uint16_t = 0x1F;
+pub const BUS_ISA: u16 = 0x10;
+pub const BUS_I8042: u16 = 0x11;
+pub const BUS_XTKBD: u16 = 0x12;
+pub const BUS_RS232: u16 = 0x13;
+pub const BUS_GAMEPORT: u16 = 0x14;
+pub const BUS_PARPORT: u16 = 0x15;
+pub const BUS_AMIGA: u16 = 0x16;
+pub const BUS_ADB: u16 = 0x17;
+pub const BUS_I2C: u16 = 0x18;
+pub const BUS_HOST: u16 = 0x19;
+pub const BUS_GSC: u16 = 0x1A;
+pub const BUS_ATARI: u16 = 0x1B;
+pub const BUS_SPI: u16 = 0x1C;
+pub const BUS_RMI: u16 = 0x1D;
+pub const BUS_CEC: u16 = 0x1E;
+pub const BUS_INTEL_ISHTP: u16 = 0x1F;
 
-pub const MT_TOOL_FINGER: uint16_t = 0;
-pub const MT_TOOL_PEN: uint16_t = 1;
-pub const MT_TOOL_PALM: uint16_t = 2;
-pub const MT_TOOL_MAX: uint16_t = 2;
+pub const MT_TOOL_FINGER: u16 = 0;
+pub const MT_TOOL_PEN: u16 = 1;
+pub const MT_TOOL_PALM: u16 = 2;
+pub const MT_TOOL_MAX: u16 = 2;
 
-pub const FF_STATUS_STOPPED: uint16_t = 0x00;
-pub const FF_STATUS_PLAYING: uint16_t = 0x01;
-pub const FF_STATUS_MAX: uint16_t = 0x01;
+pub const FF_STATUS_STOPPED: u16 = 0x00;
+pub const FF_STATUS_PLAYING: u16 = 0x01;
+pub const FF_STATUS_MAX: u16 = 0x01;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -159,8 +159,8 @@ pub struct repeat_settings {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct input_mt_request_layout<T: ?Sized = [int32_t]> {
-    pub code: uint32_t,
+pub struct input_mt_request_layout<T: ?Sized = [i32]> {
+    pub code: u32,
     pub values: T,
 }
 
@@ -221,7 +221,7 @@ ioctl! {
 
 ioctl! {
     /// get device properties
-    read_buf ev_get_prop with b'E', 0x09; uint8_t
+    read_buf ev_get_prop with b'E', 0x09; u8
 }
 
 /// get MT slot values
@@ -232,26 +232,26 @@ pub unsafe fn ev_get_mtslots(fd: c_int, buf: *mut input_mt_request_layout) -> ni
 
 ioctl! {
     /// get global key state
-    read_buf ev_get_key with b'E', 0x18; uint8_t
+    read_buf ev_get_key with b'E', 0x18; u8
 }
 
 ioctl! {
     /// get all LEDs
-    read_buf ev_get_led with b'E', 0x19; uint8_t
+    read_buf ev_get_led with b'E', 0x19; u8
 }
 
 ioctl! {
     /// get all sounds status
-    read_buf ev_get_snd with b'E', 0x1a; uint8_t
+    read_buf ev_get_snd with b'E', 0x1a; u8
 }
 
 ioctl! {
     /// get all switch states
-    read_buf ev_get_sw with b'E', 0x1b; uint8_t
+    read_buf ev_get_sw with b'E', 0x1b; u8
 }
 
 /// get event bits
-pub unsafe fn ev_get_bit(fd: c_int, ev: u32, buf: &mut [uint8_t]) -> nix::Result<i32> {
+pub unsafe fn ev_get_bit(fd: c_int, ev: u32, buf: &mut [u8]) -> nix::Result<i32> {
     convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x20 + ev, buf.len()) as ioctl_num_type, buf))
 }
 

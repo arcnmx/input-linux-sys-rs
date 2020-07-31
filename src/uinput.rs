@@ -1,4 +1,4 @@
-use libc::{c_char, c_int, c_uint, uint16_t, int32_t, uint32_t};
+use libc::{c_char, c_int, c_uint};
 
 pub const UINPUT_MAX_NAME_SIZE: c_int = 80;
 
@@ -14,12 +14,12 @@ pub const UI_FF_ERASE: c_int = 2;
 pub struct uinput_setup {
     pub id: ::input_id,
     pub name: [c_char; UINPUT_MAX_NAME_SIZE as usize],
-    pub ff_effects_max: uint32_t,
+    pub ff_effects_max: u32,
 }
 
 #[repr(C)]
 pub struct uinput_abs_setup {
-    pub code: uint16_t,
+    pub code: u16,
     pub absinfo: ::input_absinfo,
 }
 
@@ -28,18 +28,18 @@ pub struct uinput_user_dev {
     pub name: [c_char; UINPUT_MAX_NAME_SIZE as usize],
     pub id: ::input_id,
 
-    pub ff_effects_max: uint32_t,
-    pub absmax: [int32_t; ::ABS_CNT as usize],
-    pub absmin: [int32_t; ::ABS_CNT as usize],
-    pub absfuzz: [int32_t; ::ABS_CNT as usize],
-    pub absflat: [int32_t; ::ABS_CNT as usize],
+    pub ff_effects_max: u32,
+    pub absmax: [i32; ::ABS_CNT as usize],
+    pub absmin: [i32; ::ABS_CNT as usize],
+    pub absfuzz: [i32; ::ABS_CNT as usize],
+    pub absflat: [i32; ::ABS_CNT as usize],
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct uinput_ff_upload {
-    pub request_id: uint32_t,
-    pub retval: int32_t,
+    pub request_id: u32,
+    pub retval: i32,
     pub effect: ::ff_effect,
     pub old: ::ff_effect,
 }
@@ -47,9 +47,9 @@ pub struct uinput_ff_upload {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct uinput_ff_erase {
-    pub request_id: uint32_t,
-    pub retval: int32_t,
-    pub effect_id: uint32_t,
+    pub request_id: u32,
+    pub retval: i32,
+    pub effect_id: u32,
 }
 
 ioctl!(none ui_dev_create with b'U', 1);
