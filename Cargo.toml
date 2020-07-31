@@ -13,4 +13,4 @@ license = "MIT"
 
 [dependencies]
 libc = "^0.2.36"
-nix = "^0.10.0"
+nix = "^0.18.0"

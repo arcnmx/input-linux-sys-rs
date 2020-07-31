@@ -164,144 +164,144 @@ pub struct input_mt_request_layout<T: ?Sized = [i32]> {
     pub values: T,
 }
 
-ioctl! {
+ioctl_read! {
     /// get driver version
-    read ev_get_version with b'E', 0x01; c_int
+    ev_get_version, b'E', 0x01, c_int
 }
 
-ioctl! {
+ioctl_read! {
     /// get device ID
-    read ev_get_id with b'E', 0x02; input_id
+    ev_get_id, b'E', 0x02, input_id
 }
 
-ioctl! {
+ioctl_read! {
     /// get repeat settings
-    read ev_get_rep with b'E', 0x03; repeat_settings
+    ev_get_rep, b'E', 0x03, repeat_settings
 }
 
-ioctl! {
+ioctl_write_ptr! {
     /// set repeat settings
-    write_ptr ev_set_rep with b'E', 0x03; repeat_settings
+    ev_set_rep, b'E', 0x03, repeat_settings
 }
 
-ioctl! {
+ioctl_read! {
     /// get keycode
-    read ev_get_keycode with b'E', 0x04; [c_uint; 2]
+    ev_get_keycode, b'E', 0x04, [c_uint; 2]
 }
 
-ioctl! {
+ioctl_read! {
     /// get keycode
-    read ev_get_keycode_v2 with b'E', 0x04; input_keymap_entry
+    ev_get_keycode_v2, b'E', 0x04, input_keymap_entry
 }
 
-ioctl! {
+ioctl_write_ptr! {
     /// set keycode
-    write_ptr ev_set_keycode with b'E', 0x04; [c_uint; 2]
+    ev_set_keycode, b'E', 0x04, [c_uint; 2]
 }
 
-ioctl! {
+ioctl_write_ptr! {
     /// set keycode
-    write_ptr ev_set_keycode_v2 with b'E', 0x04; input_keymap_entry
+    ev_set_keycode_v2, b'E', 0x04, input_keymap_entry
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get device name
-    read_buf ev_get_name with b'E', 0x06; c_char
+    ev_get_name, b'E', 0x06, c_char
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get physical location
-    read_buf ev_get_phys with b'E', 0x07; c_char
+    ev_get_phys, b'E', 0x07, c_char
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get unique identifier
-    read_buf ev_get_uniq with b'E', 0x08; c_char
+    ev_get_uniq, b'E', 0x08, c_char
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get device properties
-    read_buf ev_get_prop with b'E', 0x09; u8
+    ev_get_prop, b'E', 0x09, u8
 }
 
 /// get MT slot values
 pub unsafe fn ev_get_mtslots(fd: c_int, buf: *mut input_mt_request_layout) -> nix::Result<i32> {
     // for some reason this isn't _IORW?
-    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x0a, size_of_val(&*buf)) as ioctl_num_type, buf))
+    convert_ioctl_res!(ioctl(fd, request_code_read!(b'E', 0x0a, size_of_val(&*buf)) as ioctl_num_type, buf))
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get global key state
-    read_buf ev_get_key with b'E', 0x18; u8
+    ev_get_key, b'E', 0x18, u8
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get all LEDs
-    read_buf ev_get_led with b'E', 0x19; u8
+    ev_get_led, b'E', 0x19, u8
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get all sounds status
-    read_buf ev_get_snd with b'E', 0x1a; u8
+    ev_get_snd, b'E', 0x1a, u8
 }
 
-ioctl! {
+ioctl_read_buf! {
     /// get all switch states
-    read_buf ev_get_sw with b'E', 0x1b; u8
+    ev_get_sw, b'E', 0x1b, u8
 }
 
 /// get event bits
 pub unsafe fn ev_get_bit(fd: c_int, ev: u32, buf: &mut [u8]) -> nix::Result<i32> {
-    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x20 + ev, buf.len()) as ioctl_num_type, buf))
+    convert_ioctl_res!(ioctl(fd, request_code_read!(b'E', 0x20 + ev, buf.len()) as ioctl_num_type, buf))
 }
 
 /// get abs value/limits
 pub unsafe fn ev_get_abs(fd: c_int, abs: u32, buf: *mut input_absinfo) -> nix::Result<i32> {
-    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x40 + abs, size_of::<input_absinfo>()) as ioctl_num_type, buf))
+    convert_ioctl_res!(ioctl(fd, request_code_read!(b'E', 0x40 + abs, size_of::<input_absinfo>()) as ioctl_num_type, buf))
 }
 
 /// set abs value/limits
 pub unsafe fn ev_set_abs(fd: c_int, abs: u32, buf: *const input_absinfo) -> nix::Result<i32> {
-    convert_ioctl_res!(ioctl(fd, ior!(b'E', 0x40 + abs, size_of::<input_absinfo>()) as ioctl_num_type, buf))
+    convert_ioctl_res!(ioctl(fd, request_code_read!(b'E', 0x40 + abs, size_of::<input_absinfo>()) as ioctl_num_type, buf))
 }
 
 /// send a force effect to a force feedback device
 pub unsafe fn ev_send_ff(fd: c_int, buf: *mut ff_effect) -> nix::Result<i32> {
     // for some reason this isn't _IORW?
-    convert_ioctl_res!(ioctl(fd, iow!(b'E', 0x80, size_of::<ff_effect>()) as ioctl_num_type, buf))
+    convert_ioctl_res!(ioctl(fd, request_code_write!(b'E', 0x80, size_of::<ff_effect>()) as ioctl_num_type, buf))
 }
 
-ioctl! {
+ioctl_write_int! {
     /// Erase a force effect
-    write_int ev_erase_ff with b'E', 0x81
+    ev_erase_ff, b'E', 0x81
 }
 
-ioctl! {
+ioctl_read! {
     /// Report number of effects playable at the same time
-    read ev_get_effects with b'E', 0x84; c_int
+    ev_get_effects, b'E', 0x84, c_int
 }
 
-ioctl! {
+ioctl_write_int! {
     /// Grab/Release device
-    write_int ev_grab with b'E', 0x90
+    ev_grab, b'E', 0x90
 }
 
-ioctl! {
+ioctl_write_int! {
     /// Revoke device access
-    write_int ev_revoke with b'E', 0x91
+    ev_revoke, b'E', 0x91
 }
 
-ioctl! {
+ioctl_read! {
     /// Retrieve current event mask
-    read ev_get_mask with b'E', 0x92; input_mask
+    ev_get_mask, b'E', 0x92, input_mask
 }
 
-ioctl! {
+ioctl_write_ptr! {
     /// Set event mask
-    write_ptr ev_set_mask with b'E', 0x93; input_mask
+    ev_set_mask, b'E', 0x93, input_mask
 }
 
-ioctl! {
+ioctl_write_ptr! {
     /// Set clockid to be used for timestamps
-    write_ptr ev_set_clockid with b'E', 0xa0; clockid_t
+    ev_set_clockid, b'E', 0xa0, clockid_t
 }

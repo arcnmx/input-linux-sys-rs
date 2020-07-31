@@ -52,43 +52,43 @@ pub struct uinput_ff_erase {
     pub effect_id: u32,
 }
 
-ioctl!(none ui_dev_create with b'U', 1);
-ioctl!(none ui_dev_destroy with b'U', 2);
+ioctl_none!(ui_dev_create, b'U', 1);
+ioctl_none!(ui_dev_destroy, b'U', 2);
 
-ioctl! {
+ioctl_write_ptr! {
     /// Set device parameters for setup
-    write_ptr ui_dev_setup with b'U', 3; uinput_setup
+    ui_dev_setup, b'U', 3, uinput_setup
 }
 
-ioctl! {
+ioctl_write_ptr! {
     /// Set absolute axis information for the device to setup
-    write_ptr ui_abs_setup with b'U', 4; uinput_abs_setup
+    ui_abs_setup, b'U', 4, uinput_abs_setup
 }
 
-ioctl!(write_int ui_set_evbit with b'U', 100);
-ioctl!(write_int ui_set_keybit with b'U', 101);
-ioctl!(write_int ui_set_relbit with b'U', 102);
-ioctl!(write_int ui_set_absbit with b'U', 103);
-ioctl!(write_int ui_set_mscbit with b'U', 104);
-ioctl!(write_int ui_set_ledbit with b'U', 105);
-ioctl!(write_int ui_set_sndbit with b'U', 106);
-ioctl!(write_int ui_set_ffbit with b'U', 107);
-ioctl!(write_ptr ui_set_phys with b'U', 108; c_char);
-ioctl!(write_int ui_set_swbit with b'U', 109);
-ioctl!(write_int ui_set_propbit with b'U', 110);
+ioctl_write_int!(ui_set_evbit, b'U', 100);
+ioctl_write_int!(ui_set_keybit, b'U', 101);
+ioctl_write_int!(ui_set_relbit, b'U', 102);
+ioctl_write_int!(ui_set_absbit, b'U', 103);
+ioctl_write_int!(ui_set_mscbit, b'U', 104);
+ioctl_write_int!(ui_set_ledbit, b'U', 105);
+ioctl_write_int!(ui_set_sndbit, b'U', 106);
+ioctl_write_int!(ui_set_ffbit, b'U', 107);
+ioctl_write_ptr!(ui_set_phys, b'U', 108, c_char);
+ioctl_write_int!(ui_set_swbit, b'U', 109);
+ioctl_write_int!(ui_set_propbit, b'U', 110);
 
-ioctl!(readwrite ui_begin_ff_upload with b'U', 200; uinput_ff_upload);
-ioctl!(write_ptr ui_end_ff_upload with b'U', 201; uinput_ff_upload);
+ioctl_readwrite!(ui_begin_ff_upload, b'U', 200, uinput_ff_upload);
+ioctl_write_ptr!(ui_end_ff_upload, b'U', 201, uinput_ff_upload);
 
-ioctl!(readwrite ui_begin_ff_erase with b'U', 202; uinput_ff_erase);
-ioctl!(write_ptr ui_end_ff_erase with b'U', 203; uinput_ff_erase);
+ioctl_readwrite!(ui_begin_ff_erase, b'U', 202, uinput_ff_erase);
+ioctl_write_ptr!(ui_end_ff_erase, b'U', 203, uinput_ff_erase);
 
-ioctl! {
+ioctl_read_buf! {
     /// get the sysfs name of the created uinput device
-    read_buf ui_get_sysname with b'U', 44; c_char
+    ui_get_sysname, b'U', 44, c_char
 }
 
-ioctl! {
+ioctl_read! {
     /// Return version of uinput protocol
-    read ui_get_version with b'U', 45; c_uint
+    ui_get_version, b'U', 45, c_uint
 }
