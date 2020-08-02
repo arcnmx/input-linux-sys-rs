@@ -862,7 +862,8 @@ pub const SW_ROTATE_LOCK:          c_int = 0x0c;  /* set = rotate locked/disable
 pub const SW_LINEIN_INSERT:        c_int = 0x0d;  /* set = inserted */
 pub const SW_MUTE_DEVICE:          c_int = 0x0e;  /* set = device disabled */
 pub const SW_PEN_INSERTED:         c_int = 0x0f;  /* set = pen inserted */
-pub const SW_MAX:                  c_int = 0x0f;
+pub const SW_MACHINE_COVER:        c_int = 0x10;  /* set = cover closed */
+pub const SW_MAX:                  c_int = 0x10;
 pub const SW_CNT:                  c_int = SW_MAX + 1;
 
 /*
