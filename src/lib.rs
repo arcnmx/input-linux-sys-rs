@@ -1,3 +1,5 @@
+#![doc(html_root_url = "https://docs.rs/input-linux-sys/0.4.0/")]
+
 #[macro_use]
 extern crate nix;
 extern crate libc;

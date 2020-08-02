@@ -6,7 +6,7 @@ authors = ["arcnmx", "meh. <meh@schizofreni.co>", "Corey Richardson <corey@octay
 description = "Bindings for <linux/{u,}input.h>"
 keywords = ["linux", "input", "evdev", "uinput"]
 
-documentation = "http://arcnmx.github.io/input-linux-sys-rs/input_linux_sys"
+documentation = "https://docs.rs/input-linux-sys/*/input_linux_sys"
 repository = "https://github.com/arcnmx/input-linux-sys-rs"
 readme = "README.md"
 license = "MIT"
