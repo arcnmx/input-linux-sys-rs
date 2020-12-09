@@ -492,6 +492,9 @@ pub const KEY_MEDIA_REPEAT:   c_int = 0x1b7; /* Consumer - transport control */
 pub const KEY_10CHANNELSUP:   c_int = 0x1b8; /* 10 channels up : c_int = 10+ */
 pub const KEY_10CHANNELSDOWN: c_int = 0x1b9; /* 10 channels down : c_int = 10- */
 pub const KEY_IMAGES:         c_int = 0x1ba; /* AL Image Browser */
+pub const KEY_NOTIFICATION_CENTER: c_int = 0x1bc; /* Show/hide the notification center */
+pub const KEY_PICKUP_PHONE: c_int = 0x1bd; /* Answer incoming call */
+pub const KEY_HANGUP_PHONE: c_int = 0x1be; /* Decline incoming call */
 
 pub const KEY_DEL_EOL:  c_int = 0x1c0;
 pub const KEY_DEL_EOS:  c_int = 0x1c1;
@@ -519,6 +522,7 @@ pub const KEY_FN_E:   c_int = 0x1e1;
 pub const KEY_FN_F:   c_int = 0x1e2;
 pub const KEY_FN_S:   c_int = 0x1e3;
 pub const KEY_FN_B:   c_int = 0x1e4;
+pub const KEY_FN_RIGHT_SHIFT: c_int = 0x1e5;
 
 pub const KEY_BRL_DOT1:  c_int = 0x1f1;
 pub const KEY_BRL_DOT2:  c_int = 0x1f2;
