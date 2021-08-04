@@ -588,6 +588,7 @@ pub const KEY_SCREENSAVER:     c_int = 0x245;  /* AL Screen Saver */
 pub const KEY_VOICECOMMAND:    c_int = 0x246;  /* Listening Voice Command */
 pub const KEY_ASSISTANT:       c_int = 0x247;  /* AL Context-aware desktop assistant */
 pub const KEY_KBD_LAYOUT_NEXT: c_int = 0x248; /* AC Next Keyboard Layout Select */
+pub const KEY_EMOJI_PICKER:    c_int = 0x249; /* Show/hide emoji picker (HUTRR101) */
 
 pub const KEY_BRIGHTNESS_MIN: c_int = 0x250; /* Set Brightness to Minimum */
 pub const KEY_BRIGHTNESS_MAX: c_int = 0x251; /* Set Brightness to Maximum */
