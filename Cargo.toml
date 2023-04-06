@@ -2,6 +2,7 @@
 name = "input-linux-sys"
 version = "0.8.0"
 authors = ["arcnmx", "meh. <meh@schizofreni.co>", "Corey Richardson <corey@octayn.net>"]
+edition = "2018"
 
 description = "Bindings for <linux/{u,}input.h>"
 keywords = ["linux", "input", "evdev", "uinput"]

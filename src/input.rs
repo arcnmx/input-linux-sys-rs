@@ -1,6 +1,12 @@
 use std::mem::{size_of, size_of_val};
-use nix;
-use nix::sys::ioctl::ioctl_num_type;
+use nix::{
+    self,
+    sys::ioctl::ioctl_num_type,
+    convert_ioctl_res,
+    ioctl_read, ioctl_read_buf,
+    ioctl_write_ptr, ioctl_write_int,
+    request_code_read, request_code_write,
+};
 use libc::{c_char, c_int, c_uint, clockid_t, ioctl};
 
 pub use libc::{

@@ -1,17 +1,13 @@
 #![doc(html_root_url = "https://docs.rs/input-linux-sys/0.8.0/")]
 
-#[macro_use]
-extern crate nix;
-extern crate libc;
-
 pub use nix::{Error, Result};
 pub use nix::errno::Errno;
 
 mod events;
-pub use events::*;
+pub use crate::events::*;
 
 mod input;
-pub use input::*;
+pub use crate::input::*;
 
 mod uinput;
-pub use uinput::*;
+pub use crate::uinput::*;

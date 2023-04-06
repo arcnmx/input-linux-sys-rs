@@ -1,4 +1,11 @@
+use crate::{ff_effect, input_absinfo, input_id, ABS_CNT};
 use libc::{c_char, c_int, c_uint};
+use nix::{
+    ioctl_none,
+    ioctl_read, ioctl_read_buf,
+    ioctl_readwrite,
+    ioctl_write_int, ioctl_write_ptr,
+};
 
 pub const UINPUT_MAX_NAME_SIZE: c_int = 80;
 
@@ -12,7 +19,7 @@ pub const UI_FF_ERASE: c_int = 2;
 
 #[repr(C)]
 pub struct uinput_setup {
-    pub id: ::input_id,
+    pub id: input_id,
     pub name: [c_char; UINPUT_MAX_NAME_SIZE as usize],
     pub ff_effects_max: u32,
 }
@@ -20,19 +27,19 @@ pub struct uinput_setup {
 #[repr(C)]
 pub struct uinput_abs_setup {
     pub code: u16,
-    pub absinfo: ::input_absinfo,
+    pub absinfo: input_absinfo,
 }
 
 #[repr(C)]
 pub struct uinput_user_dev {
     pub name: [c_char; UINPUT_MAX_NAME_SIZE as usize],
-    pub id: ::input_id,
+    pub id: input_id,
 
     pub ff_effects_max: u32,
-    pub absmax: [i32; ::ABS_CNT as usize],
-    pub absmin: [i32; ::ABS_CNT as usize],
-    pub absfuzz: [i32; ::ABS_CNT as usize],
-    pub absflat: [i32; ::ABS_CNT as usize],
+    pub absmax: [i32; ABS_CNT as usize],
+    pub absmin: [i32; ABS_CNT as usize],
+    pub absfuzz: [i32; ABS_CNT as usize],
+    pub absflat: [i32; ABS_CNT as usize],
 }
 
 #[repr(C)]
@@ -40,8 +47,8 @@ pub struct uinput_user_dev {
 pub struct uinput_ff_upload {
     pub request_id: u32,
     pub retval: i32,
-    pub effect: ::ff_effect,
-    pub old: ::ff_effect,
+    pub effect: ff_effect,
+    pub old: ff_effect,
 }
 
 #[repr(C)]
