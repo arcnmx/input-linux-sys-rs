@@ -258,7 +258,8 @@ pub const KEY_PLAYCD:         c_int = 200;
 pub const KEY_PAUSECD:        c_int = 201;
 pub const KEY_PROG3:          c_int = 202;
 pub const KEY_PROG4:          c_int = 203;
-pub const KEY_DASHBOARD:      c_int = 204; /* AL Dashboard */
+pub const KEY_ALL_APPLICATIONS: c_int = 204; /* AC Desktop Show All Applications */
+pub const KEY_DASHBOARD:      c_int = KEY_ALL_APPLICATIONS; /* AL Dashboard */
 pub const KEY_SUSPEND:        c_int = 205;
 pub const KEY_CLOSE:          c_int = 206; /* AC Close */
 pub const KEY_PLAY:           c_int = 207;
@@ -589,6 +590,10 @@ pub const KEY_VOICECOMMAND:    c_int = 0x246;  /* Listening Voice Command */
 pub const KEY_ASSISTANT:       c_int = 0x247;  /* AL Context-aware desktop assistant */
 pub const KEY_KBD_LAYOUT_NEXT: c_int = 0x248; /* AC Next Keyboard Layout Select */
 pub const KEY_EMOJI_PICKER:    c_int = 0x249; /* Show/hide emoji picker (HUTRR101) */
+pub const KEY_DICTATE:         c_int = 0x24a; /* Start or Stop Voice Dictation Session (HUTRR99) */
+pub const KEY_CAMERA_ACCESS_ENABLE:  c_int = 0x24b; /* Enables programmatic access to camera devices. (HUTRR72) */
+pub const KEY_CAMERA_ACCESS_DISABLE: c_int = 0x24c; /* Disables programmatic access to camera devices. (HUTRR72) */
+pub const KEY_CAMERA_ACCESS_TOGGLE:  c_int = 0x24d; /* Toggles the current state of the camera access control. (HUTRR72) */
 
 pub const KEY_BRIGHTNESS_MIN: c_int = 0x250; /* Set Brightness to Minimum */
 pub const KEY_BRIGHTNESS_MAX: c_int = 0x251; /* Set Brightness to Maximum */
@@ -634,6 +639,27 @@ pub const KEY_ONSCREEN_KEYBOARD: c_int = 0x278;
 pub const KEY_PRIVACY_SCREEN_TOGGLE: c_int = 0x279; /* Electronic privacy screen control */
 
 pub const KEY_SELECTIVE_SCREENSHOT: c_int = 0x27a; /* Select an area of screen to be copied */
+
+/* Move the focus to the next or previous user controllable element within a UI container */
+pub const KEY_NEXT_ELEMENT: c_int = 0x27b;
+pub const KEY_PREVIOUS_ELEMENT: c_int = 0x27c;
+
+/* Toggle Autopilot engagement */
+pub const KEY_AUTOPILOT_ENGAGE_TOGGLE: c_int = 0x27d;
+
+/* Shortcut Keys */
+pub const KEY_MARK_WAYPOINT: c_int = 0x27e;
+pub const KEY_SOS: c_int = 0x27f;
+pub const KEY_NAV_CHART: c_int = 0x280;
+pub const KEY_FISHING_CHART: c_int = 0x281;
+pub const KEY_SINGLE_RANGE_RADAR: c_int = 0x282;
+pub const KEY_DUAL_RANGE_RADAR: c_int = 0x283;
+pub const KEY_RADAR_OVERLAY: c_int = 0x284;
+pub const KEY_TRADITIONAL_SONAR: c_int = 0x285;
+pub const KEY_CLEARVU_SONAR: c_int = 0x286;
+pub const KEY_SIDEVU_SONAR: c_int = 0x287;
+pub const KEY_NAV_INFO: c_int = 0x288;
+pub const KEY_BRIGHTNESS_MENU: c_int = 0x289;
 
 /*
  * Some keyboards have keys which do not have a defined meaning, these keys
@@ -814,6 +840,7 @@ pub const ABS_TILT_Y:     c_int = 0x1b;
 pub const ABS_TOOL_WIDTH: c_int = 0x1c;
 
 pub const ABS_VOLUME: c_int = 0x20;
+pub const ABS_PROFILE: c_int = 0x21;
 
 pub const ABS_MISC: c_int = 0x28;
 
