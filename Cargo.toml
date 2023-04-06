@@ -1,6 +1,6 @@
 [package]
 name = "input-linux-sys"
-version = "0.7.0"
+version = "0.8.0"
 authors = ["arcnmx", "meh. <meh@schizofreni.co>", "Corey Richardson <corey@octayn.net>"]
 
 description = "Bindings for <linux/{u,}input.h>"
@@ -18,5 +18,5 @@ include = [
 ]
 
 [dependencies]
-libc = "^0.2.36"
-nix = "^0.22.0"
+libc = "0.2"
+nix = "0.26"
