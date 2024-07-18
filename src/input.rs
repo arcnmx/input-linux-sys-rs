@@ -47,10 +47,12 @@ pub const BUS_SPI: u16 = 0x1C;
 pub const BUS_RMI: u16 = 0x1D;
 pub const BUS_CEC: u16 = 0x1E;
 pub const BUS_INTEL_ISHTP: u16 = 0x1F;
+pub const BUS_AMD_SFH: u16 = 0x20;
 
-pub const MT_TOOL_FINGER: u16 = 0;
-pub const MT_TOOL_PEN: u16 = 1;
-pub const MT_TOOL_PALM: u16 = 2;
+pub const MT_TOOL_FINGER: u16 = 0x00;
+pub const MT_TOOL_PEN: u16 = 0x01;
+pub const MT_TOOL_PALM: u16 = 0x02;
+pub const MT_TOOL_DIAL: u16 = 0x0a;
 pub const MT_TOOL_MAX: u16 = 2;
 
 pub const FF_STATUS_STOPPED: u16 = 0x00;
@@ -65,6 +67,8 @@ pub const FF_FRICTION: u16 = 0x54;
 pub const FF_DAMPER: u16 = 0x55;
 pub const FF_INERTIA: u16 = 0x56;
 pub const FF_RAMP: u16 = 0x57;
+pub const FF_EFFECT_MIN: u16 = FF_RUMBLE;
+pub const FF_EFFECT_MAX: u16 = FF_RAMP;
 
 pub const FF_SQUARE: u16 = 0x58;
 pub const FF_TRIANGLE: u16 = 0x59;
@@ -72,10 +76,15 @@ pub const FF_SINE: u16 = 0x5a;
 pub const FF_SAW_UP: u16 = 0x5b;
 pub const FF_SAW_DOWN: u16 = 0x5c;
 pub const FF_CUSTOM: u16 = 0x5d;
+pub const FF_WAVEFORM_MIN: u16 = FF_SQUARE;
+pub const FF_WAVEFORM_MAX: u16 = FF_CUSTOM;
 
+/// Set ff device properties
 pub const FF_GAIN: u16 = 0x60;
 pub const FF_AUTOCENTER: u16 = 0x61;
 
+/// The greatest safe value for effect_id is `FF_GAIN - 1`
+pub const FF_MAX_EFFECTS: u16 = FF_GAIN;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
