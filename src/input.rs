@@ -53,7 +53,7 @@ pub const MT_TOOL_FINGER: u16 = 0x00;
 pub const MT_TOOL_PEN: u16 = 0x01;
 pub const MT_TOOL_PALM: u16 = 0x02;
 pub const MT_TOOL_DIAL: u16 = 0x0a;
-pub const MT_TOOL_MAX: u16 = 2;
+pub const MT_TOOL_MAX: u16 = 0x0f;
 
 pub const FF_STATUS_STOPPED: u16 = 0x00;
 pub const FF_STATUS_PLAYING: u16 = 0x01;
