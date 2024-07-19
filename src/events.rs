@@ -577,8 +577,9 @@ pub const BTN_DPAD_DOWN:  c_int = 0x221;
 pub const BTN_DPAD_LEFT:  c_int = 0x222;
 pub const BTN_DPAD_RIGHT: c_int = 0x223;
 
-pub const KEY_ALS_TOGGLE:         c_int = 0x230; /* Ambient light sensor */
-pub const KEY_ROTATE_LOCK_TOGGLE: c_int = 0x231; /* Display rotation lock */
+pub const KEY_ALS_TOGGLE:          c_int = 0x230; /* Ambient light sensor */
+pub const KEY_ROTATE_LOCK_TOGGLE:  c_int = 0x231; /* Display rotation lock */
+pub const KEY_REFRESH_RATE_TOGGLE: c_int = 0x232; /* Display refresh rate toggle */
 
 pub const KEY_BUTTONCONFIG:    c_int = 0x240;  /* AL Button Configuration */
 pub const KEY_TASKMANAGER:     c_int = 0x241;  /* AL Task/Project Manager */
@@ -594,6 +595,8 @@ pub const KEY_DICTATE:         c_int = 0x24a; /* Start or Stop Voice Dictation S
 pub const KEY_CAMERA_ACCESS_ENABLE:  c_int = 0x24b; /* Enables programmatic access to camera devices. (HUTRR72) */
 pub const KEY_CAMERA_ACCESS_DISABLE: c_int = 0x24c; /* Disables programmatic access to camera devices. (HUTRR72) */
 pub const KEY_CAMERA_ACCESS_TOGGLE:  c_int = 0x24d; /* Toggles the current state of the camera access control. (HUTRR72) */
+pub const KEY_ACCESSIBILITY:         c_int = 0x24e; /* Toggles the system bound accessibility UI/command (HUTRR116) */
+pub const KEY_DO_NOT_DISTURB:        c_int = 0x24f; /* Toggles the system-wide "Do Not Disturb" control (HUTRR94)*/
 
 pub const KEY_BRIGHTNESS_MIN: c_int = 0x250; /* Set Brightness to Minimum */
 pub const KEY_BRIGHTNESS_MAX: c_int = 0x251; /* Set Brightness to Maximum */
