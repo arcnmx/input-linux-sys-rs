@@ -57,6 +57,26 @@ pub const FF_STATUS_STOPPED: u16 = 0x00;
 pub const FF_STATUS_PLAYING: u16 = 0x01;
 pub const FF_STATUS_MAX: u16 = 0x01;
 
+pub const FF_RUMBLE: u16 = 0x50;
+pub const FF_PERIODIC: u16 = 0x51;
+pub const FF_CONSTANT: u16 = 0x52;
+pub const FF_SPRING: u16 = 0x53;
+pub const FF_FRICTION: u16 = 0x54;
+pub const FF_DAMPER: u16 = 0x55;
+pub const FF_INERTIA: u16 = 0x56;
+pub const FF_RAMP: u16 = 0x57;
+
+pub const FF_SQUARE: u16 = 0x58;
+pub const FF_TRIANGLE: u16 = 0x59;
+pub const FF_SINE: u16 = 0x5a;
+pub const FF_SAW_UP: u16 = 0x5b;
+pub const FF_SAW_DOWN: u16 = 0x5c;
+pub const FF_CUSTOM: u16 = 0x5d;
+
+pub const FF_GAIN: u16 = 0x60;
+pub const FF_AUTOCENTER: u16 = 0x61;
+
+
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct ff_effect_union {
