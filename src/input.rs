@@ -86,6 +86,9 @@ pub const FF_AUTOCENTER: u16 = 0x61;
 /// The greatest safe value for effect_id is `FF_GAIN - 1`
 pub const FF_MAX_EFFECTS: u16 = FF_GAIN;
 
+pub const FF_MAX: u16 = 0x7f;
+pub const FF_CNT: u16 = FF_MAX + 1;
+
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct ff_effect_union {
