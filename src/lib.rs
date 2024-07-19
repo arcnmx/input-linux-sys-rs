@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/input-linux-sys/0.8.2/")]
+#![doc(html_root_url = "https://docs.rs/input-linux-sys/0.9.0/")]
 
 pub use nix::{Error, Result};
 pub use nix::errno::Errno;

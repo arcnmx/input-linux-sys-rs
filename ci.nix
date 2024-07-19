@@ -3,7 +3,10 @@
 in {
   config = {
     name = "input-linux-sys";
-    ci.gh-actions.enable = true;
+    ci = {
+      version = "v0.7";
+      gh-actions.enable = true;
+    };
     cache.cachix = {
       ci.signingKey = "";
       arc.enable = true;
